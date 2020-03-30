@@ -55,7 +55,7 @@ config = {
     'quickhits': {
         'output_file': '/raw_quickhits',
         # 'command': "'/root/tools/pentest-tools/quickhits.py -g -t 100 -f \"/opt/SecLists/mine/myhardw.txt\" -u \"' + f_source + '\" 2>&1 >/dev/null'"
-        'command': "'ffuf -u HFUZZ/WFUZZ -w \"' + app.f_urls + '\":HFUZZ -w \"/opt/SecLists/mine/myhardw.txt\":WFUZZ -o raw_quickhits 2>&1 >/dev/null &'"
+        'command': "'ffuf -u HFUZZ/WFUZZ -w \"' + app.f_urls + '\":HFUZZ -w \"/root/tools/pentest-tools/SecLists/mine/myhardw.txt\":WFUZZ -o raw_quickhits 2>&1 >/dev/null &'"
     },
     'googledorks': {
         'threads': 5,
@@ -74,11 +74,11 @@ config = {
     },
     'subto': {
         'output_file': '/subto/output',
-        'command': "'subjack -a -t 50 -timeout 20 -ssl -c \"/opt/SecLists/mine/subjack_fingerprints.json\" -v -w \"' + app.f_hosts + '\" -o \"subto/output\" 2>&1 >/dev/null &'"
+        'command': "'subjack -a -t 50 -timeout 20 -ssl -c \"/root/go/src/github.com/sumgr0/subjack/fingerprints.json\" -v -w \"' + app.f_hosts + '\" -o \"subto/output\" 2>&1 >/dev/null &'"
     },
     'xss': {
         'output_file': '/xss/output',
-        'command': "'/root/tools/pentest-tools/xss.py -t 10 -n \"/usr/local/bin/phantomjs\" -p \"/opt/SecLists/mine/xss-myshort.txt\" -u \"' + app.f_endpoints + '\" 2>&1 >/dev/null &'"
+        'command': "'/root/tools/pentest-tools/xss.py -t 10 -n \"/usr/local/bin/phantomjs\" -p \"/root/tools/pentest-tools/SecLists/mine/xss-myshort.txt\" -u \"' + app.f_endpoints + '\" 2>&1 >/dev/null &'"
     },
     'extractjuicy': {
         'output_file': '/juicy',
