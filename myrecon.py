@@ -13,13 +13,13 @@ config = {
     'subdomains': {
         'threads': 5,
         # 'command': "'assetfinder -subs-only ' + domain"
-        'command': "'findomain -t ' + domain"
+        'command': "'findomain-plus -t ' + domain"
     },
     'endpoints': {
         'commands': [
-            "'github-endpoints.py -d ' + domain + ' -s | tee -a raw_github-endpoints endpoints_grabbed 2>&1 >/dev/null &'",
-            "'google-search.py -b -d -e 100 -t \"site:' + domain + '\" | tee -a raw_google-domain endpoints_grabbed 2>&1 >/dev/null &'",
-            "'google-search.py -b -d -e 100 -t \"site:' + domain + ' inurl:&\" | tee -a raw_google-domain endpoints_grabbed 2>&1 >/dev/null &'",
+            "'/root/tools/github-search/github-endpoints.py -d ' + domain + ' -s | tee -a raw_github-endpoints endpoints_grabbed 2>&1 >/dev/null &'",
+            "'/root/tools/github-search/google-search.py -b -d -e 100 -t \"site:' + domain + '\" | tee -a raw_google-domain endpoints_grabbed 2>&1 >/dev/null &'",
+            "'/root/tools/github-search/google-search.py -b -d -e 100 -t \"site:' + domain + ' inurl:&\" | tee -a raw_google-domain endpoints_grabbed 2>&1 >/dev/null &'",
             "'waybackurls ' + domain + ' true ' + os.getcwd() + '/raw_wayback 2>&1 >/dev/null &'",
         ]
     },
@@ -38,30 +38,30 @@ config = {
     },
     'smuggling': {
         'output_file': '/smuggler/output',
-        'command': "'smuggler.py -v 0 -t 50 -u \"' + app.f_urls_hosts + '\" 2>&1 >/dev/null &'"
+        'command': "'/root/tools/pentest-tools/smuggler.py -v 0 -t 50 -u \"' + app.f_urls_hosts + '\" 2>&1 >/dev/null &'"
     },
     'crlf': {
         'output_file': '/crlf/output',
-        'command': "'crlf.py -t 200 -u \"' + app.f_urls_hosts + '\" 2>&1 >/dev/null &'"
+        'command': "'/root/tools/pentest-tools/crlf.py -t 200 -u \"' + app.f_urls_hosts + '\" 2>&1 >/dev/null &'"
     },
     'cors': {
         'output_file': '/cors/output',
-        'command': "'cors.py -t 100 -u \"' + app.f_urls_hosts + '\" 2>&1 >/dev/null &'"
+        'command': "'/root/tools/pentest-tools/cors.py -t 100 -u \"' + app.f_urls_hosts + '\" 2>&1 >/dev/null &'"
     },
     'openredirect': {
         'output_file': '/openredirect/output',
-        'command': "'openredirect.py -t 100 -u \"' + app.f_endpoints + '\" 2>&1 >/dev/null &'"
+        'command': "'/root/tools/pentest-tools/openredirect.py -t 100 -u \"' + app.f_endpoints + '\" 2>&1 >/dev/null &'"
     },
     'quickhits': {
         'output_file': '/raw_quickhits',
-        # 'command': "'quickhits.py -g -t 100 -f \"/opt/SecLists/mine/myhardw.txt\" -u \"' + f_source + '\" 2>&1 >/dev/null'"
+        # 'command': "'/root/tools/pentest-tools/quickhits.py -g -t 100 -f \"/opt/SecLists/mine/myhardw.txt\" -u \"' + f_source + '\" 2>&1 >/dev/null'"
         'command': "'ffuf -u HFUZZ/WFUZZ -w \"' + app.f_urls + '\":HFUZZ -w \"/opt/SecLists/mine/myhardw.txt\":WFUZZ -o raw_quickhits 2>&1 >/dev/null &'"
     },
     'googledorks': {
         'threads': 5,
         'n_pages': 1,
         'urldecode': True,
-        'dorks_file': '/opt/SecLists/mine/gg-dorks.txt',
+        'dorks_file': '/root/tools/pentest-tools/gg-dorks.txt',
         'fb_cookie': os.getenv( 'FACEBOOK_COOKIE' )
     },
     'wayback': {
@@ -78,7 +78,7 @@ config = {
     },
     'xss': {
         'output_file': '/xss/output',
-        'command': "'xss.py -t 10 -n \"/usr/local/bin/phantomjs\" -p \"/opt/SecLists/mine/xss-myshort.txt\" -u \"' + app.f_endpoints + '\" 2>&1 >/dev/null &'"
+        'command': "'/root/tools/pentest-tools/xss.py -t 10 -n \"/usr/local/bin/phantomjs\" -p \"/opt/SecLists/mine/xss-myshort.txt\" -u \"' + app.f_endpoints + '\" 2>&1 >/dev/null &'"
     },
     'extractjuicy': {
         'output_file': '/juicy',
